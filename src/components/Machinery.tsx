@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
-import { machines } from "@/lib/content";
+import { machines, bnDigits } from "@/lib/content";
 import SectionHeading from "./SectionHeading";
 
 const INITIAL = 8;
@@ -15,9 +15,10 @@ export default function Machinery() {
   const visible = showAll ? machines : machines.slice(0, INITIAL);
 
   return (
-    <section id="machinery" className="py-20 sm:py-24">
+    <section id="machinery" className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
+          index="03"
           kicker={{ en: "Production Power", bn: "প্রোডাকশন ক্ষমতা" }}
           title={{ en: "Our Printing Machinery", bn: "আমাদের প্রিন্টিং মেশিনারিজ" }}
           sub={{
@@ -34,7 +35,7 @@ export default function Machinery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ duration: 0.4, delay: (i % 4) * 0.06 }}
-              className="group paper-card overflow-hidden rounded-2xl"
+              className="group paper-card overflow-hidden"
             >
               <div className="relative flex h-44 items-center justify-center overflow-hidden bg-gradient-to-br from-ink/[0.03] to-ink/[0.08] p-4">
                 <Image
@@ -57,11 +58,11 @@ export default function Machinery() {
         <div className="mt-10 text-center">
           <button
             onClick={() => setShowAll(!showAll)}
-            className="ink-btn rounded-full border-2 border-ink px-8 py-3 font-bold"
+            className="border border-ink/40 px-8 py-3 font-bold transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-white"
           >
             {showAll
               ? lang === "bn" ? "কম দেখুন" : "Show Less"
-              : lang === "bn" ? `সব ${machines.length}টি মেশিন দেখুন` : `View All ${machines.length} Machines`}
+              : lang === "bn" ? `সব ${bnDigits(machines.length)}টি মেশিন দেখুন` : `View All ${machines.length} Machines`}
           </button>
         </div>
       </div>

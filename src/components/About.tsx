@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const points = [
@@ -35,7 +36,7 @@ export default function About() {
   const { lang, t } = useLanguage();
 
   return (
-    <section id="about" className="halftone py-20 sm:py-24">
+    <section id="about" className="halftone py-20 sm:py-28">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -43,9 +44,9 @@ export default function About() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <div className="mb-3 flex items-center gap-3">
-            <span className="h-px w-8 bg-brand-red" />
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-red">
+          <div className="mb-4 flex items-baseline gap-4 border-b border-ink/15 pb-4">
+            <span className="font-display text-sm font-bold tabular-nums text-ink/40">05</span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-ink/60">
               {t({ en: "Our Story", bn: "আমাদের গল্প" })}
             </span>
           </div>
@@ -70,8 +71,8 @@ export default function About() {
                 transition={{ duration: 0.35, delay: i * 0.07 }}
                 className="flex items-start gap-3"
               >
-                <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-yellow text-[10px] font-black text-ink">
-                  ✓
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border border-ink/30 text-ink">
+                  <Check strokeWidth={2.5} className="h-3 w-3" />
                 </span>
                 <span className="text-sm leading-relaxed text-ink/75">{t(p)}</span>
               </motion.li>
@@ -86,7 +87,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="space-y-6"
         >
-          <div className="paper-card rotate-1 rounded-2xl p-4 transition-transform duration-500 hover:rotate-0">
+          <div className="paper-card crop-corners p-4">
             <Image
               src="/images/binding-line.png"
               alt="14-clamp PBM hot glue book binding line at Comtech factory, Rangpur"
@@ -99,7 +100,7 @@ export default function About() {
             </p>
           </div>
 
-          <div className="rounded-2xl bg-brand-blue p-8 text-white">
+          <div className="bg-brand-blue p-8 text-white">
             <div className="reg-mark mb-4 text-brand-yellow" />
             <blockquote className="font-display text-xl font-semibold leading-relaxed">
               {lang === "bn"

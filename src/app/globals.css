@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --paper: #faf7f2;
-  --ink: #14213d;
+  --paper: #f6f4ef;
+  --ink: #171d2b;
   --brand-blue: #1b3f8f;
-  --brand-red: #e21b22;
-  --brand-yellow: #ffd200;
+  --brand-red: #d5121e;
+  --brand-yellow: #f2b705;
   --cyan: #00aeef;
   --magenta: #ec008c;
+  --hairline: rgba(23, 29, 43, 0.14);
 }
 
 html {
@@ -45,15 +46,27 @@ html[data-lang="bn"] .font-display {
   }
 }
 
-/* Halftone dot pattern */
+/* Halftone dot pattern — subtle, corner fade */
 .halftone {
-  background-image: radial-gradient(circle, rgba(20, 33, 61, 0.12) 1.5px, transparent 1.5px);
-  background-size: 14px 14px;
+  background-image: radial-gradient(circle, rgba(23, 29, 43, 0.07) 1px, transparent 1px);
+  background-size: 18px 18px;
 }
 
 .halftone-light {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1.5px, transparent 1.5px);
-  background-size: 14px 14px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* Ruled hairline grid, like a layout sheet */
+.ruled {
+  background-image:
+    linear-gradient(to right, rgba(23, 29, 43, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 29, 43, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.hairline {
+  border: 1px solid var(--hairline);
 }
 
 /* CMYK bar */
@@ -69,10 +82,14 @@ html[data-lang="bn"] .font-display {
 
 /* Paper texture card */
 .paper-card {
-  background: #fff;
-  box-shadow:
-    0 1px 2px rgba(20, 33, 61, 0.06),
-    0 8px 24px -8px rgba(20, 33, 61, 0.12);
+  background: #fffdf9;
+  border: 1px solid var(--hairline);
+  box-shadow: 0 1px 2px rgba(23, 29, 43, 0.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.paper-card:hover {
+  border-color: rgba(23, 29, 43, 0.3);
+  box-shadow: 0 12px 32px -12px rgba(23, 29, 43, 0.18);
 }
 
 /* Ink-fill hover button */
@@ -155,6 +172,30 @@ html[data-lang="bn"] .font-display {
 }
 
 .text-outline {
-  -webkit-text-stroke: 1.5px rgba(20, 33, 61, 0.25);
+  -webkit-text-stroke: 1.5px rgba(23, 29, 43, 0.25);
   color: transparent;
+}
+
+/* Corner crop marks, like a press sheet */
+.crop-corners {
+  position: relative;
+}
+.crop-corners::before,
+.crop-corners::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(23, 29, 43, 0.35);
+  border-style: solid;
+}
+.crop-corners::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1.5px 0 0 1.5px;
+}
+.crop-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1.5px 1.5px 0;
 }

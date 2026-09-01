@@ -3,11 +3,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
-import { waLink } from "@/lib/content";
+import { machines, waLink, bnDigits } from "@/lib/content";
 
 const stats = [
   { value: "30+", label: { en: "Years of Trust", bn: "বছরের আস্থা" } },
-  { value: "28+", label: { en: "Production Machines", bn: "প্রোডাকশন মেশিন" } },
+  { value: `${machines.length}`, label: { en: "Production Machines", bn: "প্রোডাকশন মেশিন" } },
   { value: "70+", label: { en: "Institutional Clients", bn: "প্রাতিষ্ঠানিক গ্রাহক" } },
   { value: "3", label: { en: "Locations in Rangpur", bn: "রংপুরে শাখা" } },
 ];
@@ -16,43 +16,24 @@ export default function Hero() {
   const { lang, t } = useLanguage();
 
   return (
-    <section id="top" className="halftone relative overflow-hidden pb-16 pt-32 sm:pt-36">
-      {/* CMYK floating dots */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <motion.div
-          className="absolute left-[8%] top-[18%] h-24 w-24 rounded-full bg-cmyk-c/20 blur-xl"
-          animate={{ y: [0, -18, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute right-[12%] top-[30%] h-32 w-32 rounded-full bg-cmyk-m/15 blur-xl"
-          animate={{ y: [0, 22, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-[20%] left-[20%] h-28 w-28 rounded-full bg-brand-yellow/25 blur-xl"
-          animate={{ y: [0, -14, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
-
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
+    <section id="top" className="ruled relative overflow-hidden pb-20 pt-32 sm:pt-36">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr]">
         <div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border-2 border-ink/15 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-ink/70"
+            className="mb-6 inline-flex items-center gap-2.5 border border-ink/20 bg-[#fffdf9] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-ink/70"
           >
-            <span className="h-2 w-2 animate-pulse rounded-full bg-brand-red" />
-            {lang === "bn" ? "১৯৯৪ সাল থেকে রংপুরে" : "Since 1994 in Rangpur"}
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-red" />
+            {lang === "bn" ? "১৯৯৪ সাল থেকে রংপুরে" : "Since 1994 · Rangpur"}
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
+            className="font-display text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl lg:text-[3.6rem]"
           >
             {lang === "bn" ? (
               <>
@@ -60,7 +41,7 @@ export default function Hero() {
                 <span className="relative inline-block text-brand-red">
                   অফসেট ও ডিজিটাল
                   <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 9" fill="none" preserveAspectRatio="none">
-                    <path d="M2 7C50 2 150 2 198 7" stroke="var(--brand-yellow)" strokeWidth="5" strokeLinecap="round" />
+                    <path d="M2 7C50 2 150 2 198 7" stroke="var(--brand-yellow)" strokeWidth="4" strokeLinecap="round" />
                   </svg>
                 </span>{" "}
                 প্রিন্টিং প্রেস
@@ -71,7 +52,7 @@ export default function Hero() {
                 <span className="relative inline-block text-brand-red">
                   Offset &amp; Digital
                   <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 9" fill="none" preserveAspectRatio="none">
-                    <path d="M2 7C50 2 150 2 198 7" stroke="var(--brand-yellow)" strokeWidth="5" strokeLinecap="round" />
+                    <path d="M2 7C50 2 150 2 198 7" stroke="var(--brand-yellow)" strokeWidth="4" strokeLinecap="round" />
                   </svg>
                 </span>{" "}
                 Printing Press
@@ -94,20 +75,24 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 flex flex-wrap items-center gap-4"
+            className="mt-9 flex flex-wrap items-center gap-3"
           >
             <a
-              href={waLink("Hello Comtech! I would like a quote for a printing job.")}
+              href={waLink(
+                lang === "bn"
+                  ? "আসসালামু আলাইকুম! আমি একটি প্রিন্টিং কাজের কোটেশন চাই।"
+                  : "Hello Comtech! I would like a quote for a printing job."
+              )}
               target="_blank"
               rel="noopener noreferrer"
-              className="ink-btn flex items-center gap-2 rounded-full bg-brand-yellow px-7 py-3.5 font-bold text-ink shadow-lg shadow-brand-yellow/30"
+              className="flex items-center gap-2.5 bg-ink px-7 py-3.5 font-bold text-white transition-colors duration-300 hover:bg-brand-red"
             >
               <WhatsAppIcon className="h-5 w-5" />
               {lang === "bn" ? "ফ্রি কোটেশন নিন" : "Get a Free Quote"}
             </a>
             <a
               href="tel:+8801715004122"
-              className="ink-btn rounded-full border-2 border-ink px-7 py-3.5 font-bold text-ink"
+              className="border border-ink/30 px-7 py-3.5 font-bold text-ink transition-colors duration-300 hover:border-ink hover:bg-[#fffdf9]"
             >
               {lang === "bn" ? "কল করুন: ০১৭১৫-০০৪১২২" : "Call: 01715-004122"}
             </a>
@@ -117,63 +102,73 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4"
+            className="mt-14 grid grid-cols-2 divide-x divide-ink/15 border-y border-ink/15 sm:grid-cols-4"
           >
             {stats.map((s) => (
-              <div key={s.value} className="border-l-4 border-brand-red pl-4">
-                <div className="font-display text-3xl font-bold">{s.value}</div>
-                <div className="text-xs font-medium text-ink/60">{t(s.label)}</div>
+              <div key={s.value} className="px-4 py-5 first:pl-0">
+                <div className="font-display text-3xl font-bold tabular-nums">
+                  {lang === "bn" ? bnDigits(s.value) : s.value}
+                </div>
+                <div className="mt-1 text-xs font-medium text-ink/55">{t(s.label)}</div>
               </div>
             ))}
           </motion.div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
           className="relative"
         >
-          <div className="paper-card relative rotate-1 rounded-2xl p-4 transition-transform duration-500 hover:rotate-0">
-            <div className="cmyk-bar h-2 w-full rounded-t-lg" />
+          <div className="paper-card crop-corners relative p-5">
+            <div className="flex items-center justify-between pb-3">
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-ink/45">
+                Press Floor · Khasbagh, Rangpur
+              </span>
+              <span className="reg-mark scale-75 text-ink/35" />
+            </div>
             <Image
               src="/images/heidelberg-sord.png"
               alt="Heidelberg 2-colour offset printing press at Comtech, Rangpur"
               width={748}
               height={346}
-              className="mt-3 w-full"
+              className="w-full"
               priority
             />
-            <div className="mt-2 flex items-center justify-between px-2 pb-1">
+            <div className="mt-4 flex items-center justify-between border-t border-ink/10 pt-3">
               <span className="text-xs font-bold uppercase tracking-widest text-ink/50">
                 Heidelberg SORD · 25/36″
               </span>
-              <span className="reg-mark text-ink/40" />
+              <span className="cmyk-bar h-1.5 w-16" />
             </div>
           </div>
-          <div className="paper-card absolute -bottom-8 -left-6 hidden w-48 -rotate-3 rounded-xl p-3 transition-transform duration-500 hover:rotate-0 sm:block">
-            <Image
-              src="/images/dx5-solvent.png"
-              alt="DX5 large-format solvent printer"
-              width={296}
-              height={190}
-              className="w-full"
-            />
-            <span className="mt-1 block text-center text-[10px] font-bold uppercase tracking-wider text-ink/50">
-              Large Format
-            </span>
-          </div>
-          <div className="paper-card absolute -right-4 -top-6 hidden w-40 rotate-6 rounded-xl p-3 transition-transform duration-500 hover:rotate-0 sm:block">
-            <Image
-              src="/images/id-cards.png"
-              alt="Full-colour ID card printing"
-              width={150}
-              height={115}
-              className="w-full"
-            />
-            <span className="mt-1 block text-center text-[10px] font-bold uppercase tracking-wider text-ink/50">
-              ID Cards
-            </span>
+
+          <div className="mt-4 grid grid-cols-2 gap-4">
+            <div className="paper-card p-3">
+              <Image
+                src="/images/dx5-solvent.png"
+                alt="DX5 large-format solvent printer"
+                width={296}
+                height={190}
+                className="mx-auto max-h-24 w-auto object-contain"
+              />
+              <span className="mt-2 block text-center text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">
+                {lang === "bn" ? "লার্জ ফরম্যাট" : "Large Format"}
+              </span>
+            </div>
+            <div className="paper-card p-3">
+              <Image
+                src="/images/id-cards.png"
+                alt="Full-colour ID card printing"
+                width={150}
+                height={115}
+                className="mx-auto max-h-24 w-auto object-contain"
+              />
+              <span className="mt-2 block text-center text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">
+                {lang === "bn" ? "আইডি কার্ড" : "ID Cards"}
+              </span>
+            </div>
           </div>
         </motion.div>
       </div>

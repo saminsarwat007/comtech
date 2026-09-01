@@ -11,9 +11,10 @@ export default function Clients() {
   const row2 = clients.filter((_, i) => i % 2 === 1);
 
   return (
-    <section id="clients" className="overflow-hidden py-20 sm:py-24">
+    <section id="clients" className="overflow-hidden py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
+          index="04"
           kicker={{ en: "Trusted By", bn: "যারা আস্থা রাখে" }}
           title={{ en: "70+ Institutions Print With Us", bn: "৭০+ প্রতিষ্ঠান আমাদের সাথে ছাপে" }}
           sub={{
@@ -33,7 +34,7 @@ export default function Clients() {
               {[...row, ...row].map((c, i) => (
                 <span
                   key={`${c}-${i}`}
-                  className="paper-card whitespace-nowrap rounded-full px-6 py-3 text-sm font-bold text-ink/75"
+                  className="paper-card whitespace-nowrap px-6 py-3 text-sm font-bold text-ink/75"
                 >
                   {c}
                 </span>

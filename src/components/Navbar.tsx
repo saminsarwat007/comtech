@@ -6,6 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { waLink } from "@/lib/content";
 
+const waText = (lang: string) =>
+  lang === "bn"
+    ? "আসসালামু আলাইকুম! আমি আপনাদের প্রিন্টিং সেবা সম্পর্কে জানতে চাই।"
+    : "Hello Comtech! I want to know about your printing services.";
+
 const navItems = [
   { href: "#services", label: { en: "Services", bn: "সেবাসমূহ" } },
   { href: "#sectors", label: { en: "Sectors", bn: "সেক্টর" } },
@@ -69,7 +74,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Language toggle */}
-          <div className="flex overflow-hidden rounded-full border-2 border-ink text-xs font-bold">
+          <div className="flex overflow-hidden border border-ink/40 text-xs font-bold">
             <button
               onClick={() => setLang("en")}
               className={`px-3 py-1.5 transition-colors ${
@@ -91,10 +96,10 @@ export default function Navbar() {
           </div>
 
           <a
-            href={waLink("Hello Comtech! I want to know about your printing services.")}
+            href={waLink(waText(lang))}
             target="_blank"
             rel="noopener noreferrer"
-            className="ink-btn hidden rounded-full bg-brand-yellow px-4 py-2 text-sm font-bold text-ink sm:block"
+            className="hidden bg-ink px-4 py-2 text-sm font-bold text-white transition-colors duration-300 hover:bg-brand-red sm:block"
           >
             {lang === "bn" ? "হোয়াটসঅ্যাপ" : "WhatsApp Us"}
           </a>
@@ -131,10 +136,10 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href={waLink("Hello Comtech! I want to know about your printing services.")}
+                href={waLink(waText(lang))}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 rounded-full bg-brand-yellow px-5 py-3 text-center font-bold"
+                className="mt-3 bg-ink px-5 py-3 text-center font-bold text-white"
               >
                 {lang === "bn" ? "হোয়াটসঅ্যাপে মেসেজ করুন" : "Message us on WhatsApp"}
               </a>

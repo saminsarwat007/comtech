@@ -1,6 +1,9 @@
 export type Lang = "en" | "bn";
 
 export const WHATSAPP_NUMBER = "8801715004122";
+export const bnDigits = (s: string | number) =>
+  String(s).replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[Number(d)]);
+
 export const waLink = (text?: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 

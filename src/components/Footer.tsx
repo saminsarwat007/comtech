@@ -33,14 +33,14 @@ export default function Footer() {
             href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 inline-block rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-bold"
+            className="mt-5 inline-block bg-[#25D366] px-5 py-2.5 text-sm font-bold transition-opacity hover:opacity-90"
           >
             {t({ en: "WhatsApp: 01715-004122", bn: "হোয়াটসঅ্যাপ: ০১৭১৫-০০৪১২২" })}
           </a>
         </div>
 
         <div className="md:col-span-2">
-          <h3 className="font-display mb-4 font-bold text-brand-yellow">
+          <h3 className="font-display mb-4 text-[11px] font-bold uppercase tracking-[0.3em] text-white/50">
             {t({ en: "Our Locations", bn: "আমাদের ঠিকানা" })}
           </h3>
           <div className="grid gap-6 sm:grid-cols-3">
