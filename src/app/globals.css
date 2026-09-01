@@ -3,25 +3,158 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #faf7f2;
+  --ink: #14213d;
+  --brand-blue: #1b3f8f;
+  --brand-red: #e21b22;
+  --brand-yellow: #ffd200;
+  --cyan: #00aeef;
+  --magenta: #ec008c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Bangla font switching */
+html[data-lang="bn"] body {
+  font-family: var(--font-bangla), sans-serif;
+}
+html[data-lang="bn"] .font-display {
+  font-family: var(--font-bangla-serif), var(--font-bangla), serif;
+}
+
+::selection {
+  background: var(--brand-yellow);
+  color: var(--ink);
+}
+
+/* Custom cursor (desktop only) */
+@media (pointer: fine) {
+  body {
+    cursor: none;
   }
+  a, button, [role="button"] {
+    cursor: none;
+  }
+}
+
+/* Halftone dot pattern */
+.halftone {
+  background-image: radial-gradient(circle, rgba(20, 33, 61, 0.12) 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+
+.halftone-light {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+
+/* CMYK bar */
+.cmyk-bar {
+  background: linear-gradient(
+    to right,
+    var(--cyan) 0 25%,
+    var(--magenta) 25% 50%,
+    var(--brand-yellow) 50% 75%,
+    var(--ink) 75% 100%
+  );
+}
+
+/* Paper texture card */
+.paper-card {
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgba(20, 33, 61, 0.06),
+    0 8px 24px -8px rgba(20, 33, 61, 0.12);
+}
+
+/* Ink-fill hover button */
+.ink-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.35s ease;
+}
+.ink-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: translateY(101%);
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  z-index: -1;
+  border-radius: inherit;
+}
+.ink-btn:hover::before {
+  transform: translateY(0);
+}
+.ink-btn:hover {
+  color: #fff;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 45s linear infinite;
+}
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* Registration mark */
+.reg-mark {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+}
+.reg-mark::before,
+.reg-mark::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.reg-mark::before {
+  left: 50%;
+  top: -5px;
+  bottom: -5px;
+  width: 1.5px;
+  transform: translateX(-50%);
+}
+.reg-mark::after {
+  top: 50%;
+  left: -5px;
+  right: -5px;
+  height: 1.5px;
+  transform: translateY(-50%);
+}
+
+/* Print roll animation for section dividers */
+@keyframes rollIn {
+  from { background-position: 0 0; }
+  to { background-position: 56px 0; }
+}
+.roll-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--brand-yellow) 0 14px,
+    var(--ink) 14px 28px
+  );
+  animation: rollIn 1.2s linear infinite;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1.5px rgba(20, 33, 61, 0.25);
+  color: transparent;
 }
