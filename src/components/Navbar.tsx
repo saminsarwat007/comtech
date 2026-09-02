@@ -129,7 +129,11 @@ export default function Navbar() {
                 <a
                   key={item.href}
                   href={item.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(false);
+                    document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
+                  }}
                   className="border-b border-ink/10 py-3 text-base font-medium"
                 >
                   {t(item.label)}
